@@ -1,7 +1,7 @@
 {
-  "productName": "app",
+  "productName": "payload-plugin-launcher",
   "version": "0.1.0",
-  "identifier": "com.ppl.app",
+  "identifier": "com.payload-plugin-launcher.app",
   "build": {
     "beforeDevCommand": "yarn dev",
     "devUrl": "http://localhost:1420",
@@ -11,7 +11,7 @@
   "app": {
     "windows": [
       {
-        "title": "app",
+        "title": "payload-plugin-launcher",
         "width": 800,
         "height": 600
       }

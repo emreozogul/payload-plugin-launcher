@@ -1,0 +1,7 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "./payload-plugin-launcher/src-tauri/Cargo.toml"
+  ],
+  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+  "rust-analyzer.procMacro.enable": true
+}
