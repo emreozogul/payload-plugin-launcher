@@ -18,12 +18,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            // Simulate getting user details from token
-            setUser({ username: 'User' });
-            setIsAuthenticated(true);
-        }
+
     }, []);
 
 

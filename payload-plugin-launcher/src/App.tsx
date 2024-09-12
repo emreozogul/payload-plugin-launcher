@@ -3,10 +3,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useAuth } from './context/AuthContext';
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-import Home from './pages/main/Home';
-import About from './pages/main/About';
+import {
+  LoginPage,
+  RegisterPage,
+  PluginsPage,
+  AnalyticsPage,
+  StorePage,
+  SettingsPage
+} from './pages';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -14,16 +18,18 @@ function App() {
   return (
     <Router>
       <Routes>
-        {!isAuthenticated ? (
+        {!isAuthenticated ? ( // isAuthenticated 
           <Route element={<MainLayout />}>
-            <Route path="/main" element={<Home />} />
-            <Route path="/main/about" element={<About />} />
-            <Route path="*" element={<Navigate to="/main" />} />
+            <Route path="/main/plugins" element={<PluginsPage />} />
+            <Route path="/main/analytics" element={<AnalyticsPage />} />
+            <Route path="/main/store" element={<StorePage />} />
+            <Route path="/main/settings" element={<SettingsPage />} />
+            <Route path="*" element={<Navigate to="/main/plugins" />} />
           </Route>
         ) : (
           <Route element={<AuthLayout />}>
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/register" element={<Register />} />
+            <Route path="/auth/login" element={<LoginPage />} />
+            <Route path="/auth/register" element={<RegisterPage />} />
             <Route path="*" element={<Navigate to="/auth/login" />} />
           </Route>
         )}

@@ -1,21 +1,80 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { ICONS } from './icons';
+
+const MENU_ITEMS = [
+
+    {
+        label: 'Plugins',
+        href: '/main/plugins',
+        icon: ICONS.PluginIcon
+    },
+    {
+        label: 'Analytics',
+        href: '/main/analytics',
+        icon: ICONS.AnalyticsIcon
+    },
+    {
+        label: 'Store',
+        href: '/main/store',
+        icon: ICONS.StoreIcon
+    },
+    {
+        label: 'Settings',
+        href: '/main/settings',
+        icon: ICONS.SettingsIcon
+    },
+
+];
 
 export default function Sidebar() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [expanded, setExpanded] = useState(true);
+    const location = useLocation(); // Hook to get the current location
+
     return (
-        <aside className="flex flex-col p-2">
-            <div className="sidebar-header">
-                {// logo here
-                }
-            </div>
-            <div className="sidebar-content">
-                <ul>
-                    {
-                        // Sidebar items here
-                    }
+        <aside className="h-screen text-white font-bold"
+            onMouseEnter={() => setExpanded(true)}
+            onMouseLeave={() => setExpanded(false)}
+        >
+            <nav className="h-full flex flex-col bg-mixed-300 border-r shadow-sm">
+                <div className="flex items-center px-4 py-3 w-full">
+                    <Link to="/main" className="flex items-center gap-4  ">
+                        <ICONS.LogoIcon className="text-blue-200 w-12 h-12" />
+                        {expanded && <span className='text-3xl'>PPL</span>}
+                    </Link>
+                </div>
+
+                <ul className="flex-1">
+                    {MENU_ITEMS.map((item, index) => {
+                        const isActive = location.pathname === item.href;
+
+                        return (
+                            <Link to={item.href} className="flex items-center ">
+                                <li
+                                    key={index}
+                                    className={`flex items-center gap-6 py-3 px-7 w-full   ${isActive ? 'bg-mixed-600' : 'hover:bg-mixed-400'}`}
+                                >
+
+                                    <item.icon className="" />
+                                    {expanded && <span>{item.label}</span>}
+
+                                </li>
+                            </Link>
+                        );
+                    })}
                 </ul>
-            </div>
+                <Link to="/main/profile" className=" border-t flex items-center">
+                    <div className="flex p-3 px-6">
+                        <ICONS.UserProfileIcon className="w-8 h-8" />
+                        <div className={`flex gap-4 items-center overflow-hidden transition-all ${expanded ? "w-32 ml-3" : "w-0"} `}>
+                            <div className="leading-4">
+                                <h4 className="font-semibold">username</h4>
+                                <span className="text-xs text-gray-600">email</span>
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            </nav>
         </aside>
     );
 }
