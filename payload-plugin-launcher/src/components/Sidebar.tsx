@@ -28,11 +28,11 @@ const MENU_ITEMS = [
 ];
 
 export default function Sidebar() {
-    const [expanded, setExpanded] = useState(true);
+    const [expanded, setExpanded] = useState(false);
     const location = useLocation(); // Hook to get the current location
 
     return (
-        <aside className="h-screen text-white font-bold"
+        <aside className=" h-screen text-white font-bold"
             onMouseEnter={() => setExpanded(true)}
             onMouseLeave={() => setExpanded(false)}
         >
