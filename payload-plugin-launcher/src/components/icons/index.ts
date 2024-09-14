@@ -10,6 +10,8 @@ import {
     HardDriveDownload as StoreIcon,
 } from "lucide-react";
 
+import StopIcon from "./Stop";
+import PlayIcon from "./Play";
 
 export const ICONS = {
     DashboardIcon,
@@ -21,4 +23,6 @@ export const ICONS = {
     LogoIcon,
     PluginIcon,
     StoreIcon,
+    StopIcon,
+    PlayIcon,
 };
