@@ -5,9 +5,8 @@ import { motion } from 'framer-motion'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ChevronRight } from 'lucide-react'
 import { BackgroundBeams } from '@/components/BackgroundBeam'
-import HoverBorderGradient from '@/components/ui/hover-border-gradient'
 
 interface FormValues {
     email: string
@@ -71,7 +70,9 @@ export default function LoginPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <h2 className="text-3xl font-bold mb-6 text-center ">Login</h2>
+                <div className='w-full flex '>
+                    <h2 className="text-3xl font-bold mb-6 ">Welcome,</h2>
+                </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <Label htmlFor="email" className="sr-only">
@@ -140,19 +141,21 @@ export default function LoginPage() {
                         </div>
                     </div>
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button
-                            as="button"
-                            className="w-full  text-white flex items-center space-x-2"
-                        >
 
-                            {isSubmitting ? 'Logging in...' : 'Login'}
-
+                        <Button type="submit" className="w-full bg-primary-500 text-black" disabled={isSubmitting}>
+                            {isSubmitting ? 'Logging in...' : 'Sign in'}
                         </Button>
-
                     </motion.div>
                 </form>
             </motion.div>
             <BackgroundBeams className='bg-mixed-100' />
+            <div className='absolute top-4 right-4 '>
+
+                <Button className='flex items-center gap-2 transition ease-in-out delay-150  hover:translate-x-1 over:bg-primary-300 duration-300 text-white bg-transparent p-0 pl-2 '>
+                    <p>Continue as <span className='underline'>guest</span></p>
+                    <ChevronRight height={22} width={22} />
+                </Button>
+            </div>
         </div>
     );
 }
