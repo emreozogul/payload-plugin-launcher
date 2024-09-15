@@ -8,12 +8,13 @@ import {
     Turtle as LogoIcon,
     Package as PluginIcon,
     HardDriveDownload as StoreIcon,
+    Trash2 as DeleteIcon,
 } from "lucide-react";
 
 import StopIcon from "./Stop";
 import PlayIcon from "./Play";
 
-export const ICONS = {
+export {
     DashboardIcon,
     SettingsIcon,
     AnalyticsIcon,
@@ -25,4 +26,5 @@ export const ICONS = {
     StoreIcon,
     StopIcon,
     PlayIcon,
+    DeleteIcon,
 };

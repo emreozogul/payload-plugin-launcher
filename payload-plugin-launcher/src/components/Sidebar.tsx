@@ -1,28 +1,35 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ICONS } from './icons';
+import {
+    AnalyticsIcon,
+    PluginIcon,
+    SettingsIcon,
+    StoreIcon,
+    UserProfileIcon,
+    LogoIcon
+} from './icons';
 
 const MENU_ITEMS = [
 
     {
         label: 'Plugins',
         href: '/main/plugins',
-        icon: ICONS.PluginIcon
+        icon: PluginIcon
     },
     {
         label: 'Analytics',
         href: '/main/analytics',
-        icon: ICONS.AnalyticsIcon
+        icon: AnalyticsIcon
     },
     {
         label: 'Store',
         href: '/main/store',
-        icon: ICONS.StoreIcon
+        icon: StoreIcon
     },
     {
         label: 'Settings',
         href: '/main/settings',
-        icon: ICONS.SettingsIcon
+        icon: SettingsIcon
     },
 
 ];
@@ -39,7 +46,7 @@ export default function Sidebar() {
             <nav className="h-full flex flex-col bg-mixed-300 border-r shadow-sm">
                 <div className="flex items-center px-4 py-3 w-full">
                     <Link to="/main" className="flex items-center gap-4  ">
-                        <ICONS.LogoIcon className="text-blue-200 w-12 h-12" />
+                        <LogoIcon className="text-blue-200 w-12 h-12" />
                         {expanded && <span className='text-3xl'>PPL</span>}
                     </Link>
                 </div>
@@ -65,8 +72,8 @@ export default function Sidebar() {
                 </ul>
                 <Link to="/main/profile" className=" border-t flex items-center">
                     <div className="flex p-3 px-6">
-                        <ICONS.UserProfileIcon className="w-8 h-8" />
-                        <div className={`flex gap-4 items-center overflow-hidden transition-all ${expanded ? "w-32 ml-3" : "w-0"} `}>
+                        <UserProfileIcon className="w-8 h-8" />
+                        <div className={`flex gap-4 items-center overflow-hidden transition-all ${expanded ? "w-24 ml-3" : "w-0"} `}>
                             <div className="leading-4">
                                 <h4 className="font-semibold">username</h4>
                                 <span className="text-xs text-gray-600">email</span>
