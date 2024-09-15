@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {isAuthenticated ? ( // isAuthenticated 
+        {!isAuthenticated ? ( // isAuthenticated 
           <Route element={<MainLayout />}>
             <Route path="/main/plugins" element={<PluginsPage />} />
             <Route path="/main/analytics" element={<AnalyticsPage />} />
