@@ -9,6 +9,8 @@ import {
     Package as PluginIcon,
     HardDriveDownload as StoreIcon,
     Trash2 as DeleteIcon,
+    Plus as AddIcon,
+    X as CloseIcon,
 } from "lucide-react";
 
 import StopIcon from "./Stop";
@@ -27,4 +29,6 @@ export {
     StopIcon,
     PlayIcon,
     DeleteIcon,
+    AddIcon,
+    CloseIcon,
 };

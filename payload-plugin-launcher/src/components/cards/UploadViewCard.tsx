@@ -5,7 +5,7 @@ import { Separator } from "../ui/separator"
 export default function UploadViewCard() {
     return (
 
-        <div className="group relative flex flex-col bg-mixed-300 w-48 h-48 rounded-md gap-4 p-4 hover:bg-mixed-300/70">
+        <div className="group relative flex flex-col bg-mixed-300 min-w-48 h-48 rounded-md gap-4 p-4 hover:bg-mixed-300/70">
             <div className="absolute inset-0 h-full w-full  flex flex-col flex-1 overflow-y-hidden">
                 <div className='w-full p-4 flex flex-col gap-1'>
 

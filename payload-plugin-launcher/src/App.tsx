@@ -8,7 +8,8 @@ import {
   PluginsPage,
   AnalyticsPage,
   StorePage,
-  SettingsPage
+  SettingsPage,
+  PluginViewPage,
 } from './pages';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/main/store" element={<StorePage />} />
             <Route path="/main/settings" element={<SettingsPage />} />
             <Route path="*" element={<Navigate to="/main/plugins" />} />
+            <Route path='/main/plugins/:id' element={<PluginViewPage />} />
           </Route>
         ) : (
           <Route element={<AuthLayout />}>
