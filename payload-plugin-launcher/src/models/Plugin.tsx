@@ -1,8 +1,11 @@
-export default interface PluginProps {
+import React from 'react';
+export type PluginProps = {
     id: string;
     name: string;
     description: string;
-    version: string;
+    icon: string;
+    route: string;
+    component: React.ReactNode;
+    status: string;
     type: string;
-    imageUrl: string;
 }
