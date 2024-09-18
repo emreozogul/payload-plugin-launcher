@@ -6,7 +6,6 @@ import {
     SettingsIcon,
     StoreIcon,
     UserProfileIcon,
-    LogoIcon
 } from './icons';
 
 const MENU_ITEMS = [
@@ -44,10 +43,9 @@ export default function Sidebar() {
             onMouseLeave={() => setExpanded(false)}
         >
             <nav className="h-full flex flex-col bg-mixed-300 border-r shadow-sm">
-                <div className="flex items-center px-4 py-3 w-full">
+                <div className="flex items-center px-4 py-3 w-full  ">
                     <Link to="/main" className="flex items-center gap-4  ">
-                        <LogoIcon className="text-blue-200 w-12 h-12" />
-                        {expanded && <span className='text-3xl'>PPL</span>}
+                        <h1 className="text-3xl font-bold">PPL</h1>
                     </Link>
                 </div>
 

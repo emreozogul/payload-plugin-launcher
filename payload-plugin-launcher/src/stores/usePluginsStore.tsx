@@ -43,6 +43,26 @@ const usePluginStore = create<PluginStore>()(
                 status: "active",
                 type: "type-3",
             },
+            {
+                id: "plugin-4",
+                name: "Plugin 4",
+                description: "This is the fourth plugin",
+                icon: "https://via.placeholder.com/150",
+                route: "/plugin-4",
+                component: <div>Plugin 4</div>,
+                status: "active",
+                type: "type-4",
+            },
+            {
+                id: "plugin-5",
+                name: "Plugin 5",
+                description: "This is the fifth plugin",
+                icon: "https://via.placeholder.com/150",
+                route: "/plugin-5",
+                component: <div>Plugin 5</div>,
+                status: "active",
+                type: "type-5",
+            }
 
         ],
         addPlugin: (plugin: PluginProps) => {
