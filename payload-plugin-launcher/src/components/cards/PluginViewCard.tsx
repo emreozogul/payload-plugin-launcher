@@ -7,14 +7,19 @@ import {
     SettingsIcon,
     DeleteIcon,
 } from '../icons';
-import { Link } from 'react-router-dom';
-import PluginProps from '@/models/Plugin';
+import { PluginProps } from '@/models/Plugin';
+import useTabStore from '@/stores/useTabsStore';
+import InfoPage from '../plugins/info-page';
 
 export default function PluginViewCard({ plugin }: { plugin: PluginProps }) {
 
+    const { setActiveContent } = useTabStore();
+
     return (
         <div className="group relative flex flex-col bg-mixed-300 min-w-48 min-h-48 rounded-md gap-4 p-4 hover:bg-mixed-300/70">
-            <Link to={`/main/plugins/${plugin.id}`} className='h-full w-full  flex flex-1'>
+            <div onClick={() => {
+                setActiveContent(<InfoPage plugin={plugin} />);
+            }} className='h-full w-full  flex flex-1'>
                 <div className="h-full w-full  flex flex-1 ">
                     <div className='w-full flex flex-col gap-1'>
                         <Label className=" font-bold text-white text-base">{plugin.name}</Label>
@@ -22,7 +27,7 @@ export default function PluginViewCard({ plugin }: { plugin: PluginProps }) {
                         <Label className="text-xs font-medium uppercase tracking-widest text-pink-500">{plugin.type}</Label>
                     </div>
                 </div>
-            </Link>
+            </div>
             <div className='flex flex-wrap w-full justify-end '>
                 <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
                     <PlayIcon className=" w-6 h-6 text-white  " />
