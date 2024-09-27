@@ -11,6 +11,8 @@ import {
     Trash2 as DeleteIcon,
     Plus as AddIcon,
     X as CloseIcon,
+    Activity as ActivityIcon,
+    RefreshCcw as RefreshIcon,
 } from "lucide-react";
 
 import StopIcon from "./Stop";
@@ -31,4 +33,6 @@ export {
     DeleteIcon,
     AddIcon,
     CloseIcon,
+    ActivityIcon,
+    RefreshIcon,
 };

@@ -13,7 +13,11 @@
       {
         "title": "payload-plugin-launcher",
         "width": 1000,
-        "height": 800
+        "height": 800,
+        "resizable": true,
+        "transparent": true,
+        "minWidth": 800,
+        "minHeight": 600
       }
     ],
     "security": {

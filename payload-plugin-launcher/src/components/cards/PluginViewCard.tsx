@@ -4,8 +4,8 @@ import { Label } from '../ui/label';
 import {
     PlayIcon,
     StopIcon,
-    SettingsIcon,
     DeleteIcon,
+    RefreshIcon,
 } from '../icons';
 import { PluginProps } from '@/models/Plugin';
 import useTabStore from '@/stores/useTabsStore';
@@ -33,7 +33,10 @@ export default function PluginViewCard({ plugin }: { plugin: PluginProps }) {
                     <PlayIcon className=" w-6 h-6 text-white  " />
                 </div>
                 <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
-                    <SettingsIcon className=" w-6 h-6 text-white  " />
+                    <RefreshIcon className=" w-6 h-6 text-white  " />
+                </div>
+                <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
+                    <StopIcon className=" w-6 h-6 text-white  " />
                 </div>
                 <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
                     <DeleteIcon className=" w-6 h-6 text-red-600  " />
