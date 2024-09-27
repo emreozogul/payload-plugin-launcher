@@ -11,7 +11,43 @@ import { PluginProps } from '@/models/Plugin';
 import useTabStore from '@/stores/useTabsStore';
 import InfoPage from '../plugins/info-page';
 
+type PluginAction = {
+    icon: React.ReactNode;
+    action: () => void;
+    className?: string;
+};
+
 export default function PluginViewCard({ plugin }: { plugin: PluginProps }) {
+
+    const handlePluginAction = (actionType: string) => {
+        switch (actionType) {
+            case 'play':
+                console.log('Play action');
+                // Implement play logic here
+                break;
+            case 'refresh':
+                console.log('Refresh action');
+                // Implement refresh logic here
+                break;
+            case 'stop':
+                console.log('Stop action');
+                // Implement stop logic here
+                break;
+            case 'delete':
+                console.log('Delete action');
+                // Implement delete logic here
+                break;
+            default:
+                console.log('Unknown action');
+        }
+    };
+
+    const pluginActions: PluginAction[] = [
+        { icon: <PlayIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('play') },
+        { icon: <RefreshIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('refresh') },
+        { icon: <StopIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('stop') },
+        { icon: <DeleteIcon className="w-6 h-6 text-red-600" />, action: () => handlePluginAction('delete') },
+    ];
 
     const { setActiveContent } = useTabStore();
 
@@ -28,19 +64,16 @@ export default function PluginViewCard({ plugin }: { plugin: PluginProps }) {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-wrap w-full justify-end '>
-                <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
-                    <PlayIcon className=" w-6 h-6 text-white  " />
-                </div>
-                <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
-                    <RefreshIcon className=" w-6 h-6 text-white  " />
-                </div>
-                <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
-                    <StopIcon className=" w-6 h-6 text-white  " />
-                </div>
-                <div className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center '>
-                    <DeleteIcon className=" w-6 h-6 text-red-600  " />
-                </div>
+            <div className='flex flex-wrap w-full justify-end'>
+                {pluginActions.map((action, index) => (
+                    <div
+                        key={index}
+                        className='flex hover:bg-white/20 rounded-full h-9 w-9 items-center justify-center cursor-pointer'
+                        onClick={action.action}
+                    >
+                        {action.icon}
+                    </div>
+                ))}
             </div>
         </div>
     );

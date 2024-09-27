@@ -54,15 +54,12 @@ export default function Sidebar() {
                         const isActive = location.pathname === item.href;
 
                         return (
-                            <Link to={item.href} className="flex items-center ">
+                            <Link key={item.href} to={item.href} className="flex items-center ">
                                 <li
-                                    key={index}
                                     className={`flex items-center gap-6 py-3 px-7 w-full   ${isActive ? 'bg-mixed-600' : 'hover:bg-mixed-400'}`}
                                 >
-
                                     <item.icon className="" />
                                     {expanded && <span>{item.label}</span>}
-
                                 </li>
                             </Link>
                         );
