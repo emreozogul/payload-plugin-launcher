@@ -77,13 +77,13 @@ export default function PluginsPage() {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                 <SortableContext items={tabs.map(tab => tab.id)} strategy={horizontalListSortingStrategy}>
-                    <TabsList className="w-full flex items-center bg-mixed-200">
+                    <TabsList className="sticky top-0 w-full flex items-center bg-mixed-200">
                         {tabs.map((tab) => (
                             <SortableTab key={tab.id} tab={tab} activeTab={activeTab} removeTab={removeTab} />
                         ))}
                         <button
                             type="button"
-                            onClick={() => addTab(plugins)}
+                            onClick={() => addTab()}
                             disabled={tabs.length >= 6}
                             className={`ml-2 flex items-center justify-center w-7 h-7 rounded-full hover:bg-mixed-300 ${tabs.length >= 6 ? "opacity-50 cursor-not-allowed" : ""}`}
                             aria-label="Add Tab"

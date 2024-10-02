@@ -19,6 +19,15 @@ type PluginAction = {
 
 export default function PluginViewCard({ plugin }: { plugin: PluginProps }) {
 
+    const { setActiveContent, activeTab } = useTabStore();
+
+    const pluginActions: PluginAction[] = [
+        { icon: <PlayIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('play') },
+        { icon: <RefreshIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('refresh') },
+        { icon: <StopIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('stop') },
+        { icon: <DeleteIcon className="w-6 h-6 text-red-600" />, action: () => handlePluginAction('delete') },
+    ];
+
     const handlePluginAction = (actionType: string) => {
         switch (actionType) {
             case 'play':
@@ -42,19 +51,10 @@ export default function PluginViewCard({ plugin }: { plugin: PluginProps }) {
         }
     };
 
-    const pluginActions: PluginAction[] = [
-        { icon: <PlayIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('play') },
-        { icon: <RefreshIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('refresh') },
-        { icon: <StopIcon className="w-6 h-6 text-white" />, action: () => handlePluginAction('stop') },
-        { icon: <DeleteIcon className="w-6 h-6 text-red-600" />, action: () => handlePluginAction('delete') },
-    ];
-
-    const { setActiveContent } = useTabStore();
-
     return (
         <div className="group relative flex flex-col bg-mixed-300 min-w-48 min-h-48 rounded-md gap-4 p-4 hover:bg-mixed-300/70">
             <div onClick={() => {
-                setActiveContent(<InfoPage plugin={plugin} />);
+                setActiveContent(activeTab, <InfoPage plugin={plugin} />);
             }} className='h-full w-full  flex flex-1'>
                 <div className="h-full w-full  flex flex-1 ">
                     <div className='w-full flex flex-col gap-1'>

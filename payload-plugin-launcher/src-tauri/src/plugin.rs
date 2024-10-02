@@ -9,4 +9,6 @@ pub struct Plugin {
     pub path: String,
     pub container_id: Option<String>,
     pub port: Option<u16>,
+    pub use_custom_dockerfile: bool,
+    pub custom_dockerfile: Option<String>,
 }

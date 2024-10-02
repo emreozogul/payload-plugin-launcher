@@ -7,6 +7,7 @@ export type Tab = {
     id: string;
     label: string;
     content: React.ReactNode;
+    prevContent: React.ReactNode;
     isClosable: boolean;
     href: string;
 }
@@ -14,15 +15,15 @@ export type Tab = {
 export interface TabStore {
     tabs: Tab[];
     activeTab: string;
-    addTab: (plugins: any[]) => void;
+    addTab: () => void;
     removeTab: (tabId: string) => void;
     setActiveTab: (tabId: string) => void;
-    setActiveContent: (content: React.ReactNode) => void;
+    setActiveContent: (tabId: string, content: React.ReactNode) => void;
+    goToPrevContent: (tabId: string) => void;
     reorderTabs: (startIndex: number, endIndex: number) => void;
 }
 
-const MAX_TABS = 6; // Define the maximum number of tabs allowed
-
+const MAX_TABS = 7;
 
 const useTabStore = create<TabStore>()(
     (set, get) => ({
@@ -31,6 +32,7 @@ const useTabStore = create<TabStore>()(
                 id: "tab-1",
                 label: "Tab 1",
                 content: <MainPage plugins={usePluginStore.getState().plugins} />,
+                prevContent: <MainPage plugins={usePluginStore.getState().plugins} />,
                 isClosable: false,
                 href: "/tab/tab-1",
             },
@@ -44,12 +46,14 @@ const useTabStore = create<TabStore>()(
             }
 
             const plugins = usePluginStore.getState().plugins;
+            const initialContent = <MainPage plugins={plugins} />;
 
             const newTabId = `tab-${Date.now()}`;
             const newTab: Tab = {
                 id: newTabId,
                 label: `Tab ${tabs.length + 1}`,
-                content: <MainPage plugins={plugins} />,
+                content: initialContent,
+                prevContent: initialContent,
                 isClosable: true,
                 href: `/tab/${newTabId}`,
             };
@@ -61,32 +65,39 @@ const useTabStore = create<TabStore>()(
         },
         removeTab: (tabId: string) => {
             const { tabs, activeTab } = get();
-            console.log("Before removal - tabs:", tabs, "activeTab:", activeTab);
             const filteredTabs = tabs.filter(tab => tab.id !== tabId);
-            console.log("After removal - filteredTabs:", filteredTabs);
 
             if (activeTab === tabId) {
                 const tabIndex = tabs.findIndex(tab => tab.id === tabId);
-                console.log("Removing active tab, index:", tabIndex);
                 if (tabIndex > 0) {
                     set({ tabs: filteredTabs, activeTab: tabs[tabIndex - 1].id });
                 } else if (filteredTabs.length > 0) {
                     set({ tabs: filteredTabs, activeTab: filteredTabs[0].id });
                 } else {
-                    set({ tabs: filteredTabs, activeTab: "" }); // No tabs left
+                    set({ tabs: filteredTabs, activeTab: "" });
                 }
             } else {
                 set({ tabs: filteredTabs });
             }
-            console.log("After state update - tabs:", get().tabs, "activeTab:", get().activeTab);
         },
         setActiveTab: (tabId: string) => set({ activeTab: tabId }),
-        setActiveContent: (content: React.ReactNode) => {
-            const { tabs, activeTab } = get();
-            const activeTabIndex = tabs.findIndex(tab => tab.id === activeTab);
-            const updatedTabs = [...tabs];
-            updatedTabs[activeTabIndex].content = content;
-            set({ tabs: updatedTabs });
+        setActiveContent: (tabId: string, content: React.ReactNode) => {
+            set((state) => ({
+                tabs: state.tabs.map(tab =>
+                    tab.id === tabId
+                        ? { ...tab, prevContent: tab.content, content }
+                        : tab
+                )
+            }));
+        },
+        goToPrevContent: (tabId: string) => {
+            set((state) => ({
+                tabs: state.tabs.map(tab =>
+                    tab.id === tabId
+                        ? { ...tab, content: tab.prevContent, prevContent: tab.content }
+                        : tab
+                )
+            }));
         },
         reorderTabs: (startIndex: number, endIndex: number) => {
             set((state) => {

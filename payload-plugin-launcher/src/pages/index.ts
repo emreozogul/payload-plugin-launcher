@@ -4,7 +4,6 @@ import SettingsPage from "./main/settings";
 import StorePage from "./main/store";
 import LoginPage from "./auth/login";
 import RegisterPage from "./auth/register";
-import PluginViewPage from "./main/plugins/[id]";
 
 export {
     AnalyticsPage,
@@ -13,5 +12,4 @@ export {
     StorePage,
     LoginPage,
     RegisterPage,
-    PluginViewPage,
 }
