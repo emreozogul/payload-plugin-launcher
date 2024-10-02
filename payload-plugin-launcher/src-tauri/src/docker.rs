@@ -1,5 +1,7 @@
 // src-tauri/src/docker.rs
 use bollard::Docker;
+use bollard::image::BuildImageOptions;
+use futures_util::stream::StreamExt;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use crate::plugin::Plugin;
@@ -23,9 +25,26 @@ impl DockerManager {
 
     pub async fn build_image(&self, plugin_path: &str, tag: &str) -> Result<(), String> {
         let docker = self.docker.lock().await;
-        // Implement Docker image build logic using bollard
-        // This is a placeholder and needs to be implemented with actual Docker SDK calls
-        println!("Building image from {} with tag {}", plugin_path, tag);
+        let mut build_opts = BuildImageOptions::default();
+        build_opts.dockerfile = "Dockerfile";
+        build_opts.t = tag;
+
+        let tar_ball = tokio::fs::read(plugin_path).await.map_err(|e| e.to_string())?;
+
+        let mut build_stream = docker.build_image(build_opts, None, Some(tar_ball.into()));
+
+        while let Some(build_result) = build_stream.next().await {
+            match build_result {
+                Ok(output) => {
+                    // Process build output if needed
+                    println!("Build output: {:?}", output);
+                }
+                Err(e) => {
+                    return Err(format!("Error during image build: {}", e));
+                }
+            }
+        }
+
         Ok(())
     }
 
